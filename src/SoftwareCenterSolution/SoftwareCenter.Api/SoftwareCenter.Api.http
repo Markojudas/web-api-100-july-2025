@@ -1,6 +1,15 @@
-@SoftwareCenter.Api_HostAddress = http://localhost:5030
+@SoftwareCenter.Api_HostAddress = http://localhost:1337
 
-GET {{SoftwareCenter.Api_HostAddress}}/weatherforecast/
+POST {{SoftwareCenter.Api_HostAddress}}/vendors/
 Accept: application/json
+Content-type: application/json
 
-###
+{
+    "name": "Some Company Name",
+    "url": "nothingnicetosay.com",
+    "pointOfContact": {
+        "name": "me",
+        "phone": "867-5309",
+        "email": "correo@correocaliente.com"
+    }
+}

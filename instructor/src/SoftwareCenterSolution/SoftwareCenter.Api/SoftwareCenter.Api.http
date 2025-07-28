@@ -1,6 +1,15 @@
-@SoftwareCenter.Api_HostAddress = http://localhost:5073
+@SoftwareCenter.Api_HostAddress = http://localhost:1337
 
-GET {{SoftwareCenter.Api_HostAddress}}/weatherforecast/
+POST {{SoftwareCenter.Api_HostAddress}}/vendors
 Accept: application/json
+Content-type: application/json
 
-###
+{
+"name": "Jetbrains",
+"url": "https://jetbrains.com",
+"pointOfContact": {
+    "name": "Silvio",
+    "email": "silvio@jbrain.com",
+    "phone": "800 Write-Code"
+}
+}

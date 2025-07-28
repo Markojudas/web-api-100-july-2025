@@ -8,10 +8,10 @@ We are building them an API.
 
 We have arrangements with vendors. Each vendor has:
 
-- And ID we assign
-- A Name
-- A Website URL
-- A Point of Contact
+- And ID we assign - 99.999% this is immutable.
+- A Name - Nope. Immutable
+- A Website URL - Immutable
+- A Point of Contact - This will change over time.
   - Name
   - Email
   - Phone Number
@@ -40,3 +40,17 @@ Software Center team members may add versions of catalog items.
 Software Center may deprecate a catalog items. (effectively retiring them, so they don't show up on the catalog)
 
 Any employee in the company can use our API to get a full list of the software catalog we currently support.
+
+
+## "Candidate" Resources
+
+- vendors
+- items
+
+
+- roles
+    - software center managers
+    - software center team members
+    - employees
+
+ 

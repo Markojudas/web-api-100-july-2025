@@ -16,7 +16,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseAuthorization();
 
-app.MapControllers();
+app.MapControllers(); // Go Find all the controllers and look at the attributes (HttPGet, HttpPost, etc...)
 Console.WriteLine("Fiaxing to run your API");
 app.Run();
 Console.WriteLine("Done");
