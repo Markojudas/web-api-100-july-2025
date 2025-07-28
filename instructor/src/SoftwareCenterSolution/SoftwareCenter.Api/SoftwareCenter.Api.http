@@ -1,0 +1,6 @@
+@SoftwareCenter.Api_HostAddress = http://localhost:5073
+
+GET {{SoftwareCenter.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
