@@ -10,6 +10,13 @@ public class Controller : ControllerBase
         [FromBody] CreateVendorRequest request,
         CancellationToken token)
     {
+
+        // validation
+        // You can't add a vendor with the same name more than once.
+        // field validation - what is required, what is optional, what are the rules for the required things
+        // domain validation - we don't already have a vendor with that same name
+        // 
+        // we have to "save it" somewhere. 
         // Mapping Code (copy from one object to another)
         var response = new CreateVendorResponse(
             Guid.NewGuid(),
