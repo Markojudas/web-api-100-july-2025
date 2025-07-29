@@ -20,3 +20,5 @@ app.MapControllers(); // Go Find all the controllers and look at the attributes 
 Console.WriteLine("Fiaxing to run your API");
 app.Run();
 Console.WriteLine("Done");
+
+public partial class Program;

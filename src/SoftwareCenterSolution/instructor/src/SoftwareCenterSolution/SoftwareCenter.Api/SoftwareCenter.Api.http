@@ -1,0 +1,24 @@
+@SoftwareCenter.Api_HostAddress = http://localhost:1337
+
+POST {{SoftwareCenter.Api_HostAddress}}/vendors
+Accept: application/json
+Content-type: application/json
+
+{
+"name": "Jetbrains",
+"url": "https://jetbrains.com",
+"pointOfContact": {
+    "name": "Silvio",
+    "email": "silvio@jbrain.com",
+    "phone": "800 Write-Code"
+}
+}
+
+
+### 
+
+GET {{SoftwareCenter.Api_HostAddress}}/vendors/09dd991a-d360-470a-8d72-a735860ef343
+
+
+### 
+GET {{SoftwareCenter.Api_HostAddress}}/vendors/

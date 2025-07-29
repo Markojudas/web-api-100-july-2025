@@ -1,6 +1,0 @@
-@SoftwareCenter.Tests_HostAddress = http://localhost:5149
-
-GET {{SoftwareCenter.Tests_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
