@@ -4,6 +4,7 @@ namespace SoftwareCenter.Api.Vendors
 {
     public class Controller : ControllerBase
     {
+        private List<CreateVendorResponse> fakeOb = new();
         // this is the method you should call when a POST /vendors is received
         [HttpPost("/vendors")]
         public async Task<ActionResult> AddAVendorAsync(
@@ -30,4 +31,9 @@ namespace SoftwareCenter.Api.Vendors
     public record CreateVendorResponse(
         Guid Id,
         string Name, string Url, CreateVendorPointOfContactRequest PointOfContact);
+
+
+
+    [HttpGet("/vendors/{id:guid}")]
+    public async Task
 }

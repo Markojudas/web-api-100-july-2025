@@ -4,12 +4,14 @@ namespace SoftwareCenter.Api.Vendors;
 
 public class Controller : ControllerBase
 {
+    private List<CreateVendorResponse> fakeDb = new();
     // this is the method you should call when a POST /vendors is received.
     [HttpPost("/vendors")]
     public async Task<ActionResult> AddAVendorAsync(
         [FromBody] CreateVendorRequest request,
         CancellationToken token)
     {
+       
 
         // validation
         // You can't add a vendor with the same name more than once.
@@ -17,6 +19,7 @@ public class Controller : ControllerBase
         // domain validation - we don't already have a vendor with that same name
         // 
         // we have to "save it" somewhere. 
+       
         // Mapping Code (copy from one object to another)
         var response = new CreateVendorResponse(
             Guid.NewGuid(),
@@ -24,6 +27,7 @@ public class Controller : ControllerBase
             request.Url,
             request.PointOfContact
             );
+        fakeDb.Add(response);
         return Ok(response); 
     }
 
@@ -32,7 +36,16 @@ public class Controller : ControllerBase
     [HttpGet("/vendors/{id:guid}")]
     public async Task<ActionResult> GetVendorByIdAsync(Guid id, CancellationToken token)
     {
-        return Ok();
+        // look that thing up in the database.
+        var response = fakeDb.Where(v => v.Id == id).FirstOrDefault();
+        if (response is null)
+        {
+            return NotFound();
+        }
+        else
+        {
+            return Ok(response);
+        }
     }
 
 }
