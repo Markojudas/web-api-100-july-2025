@@ -24,3 +24,5 @@ app.MapControllers(); // Go find all the controllers and look at the attributes 
 Console.WriteLine("Fixing to run your API");
 app.Run(); // this is a "blocking method" basically a while(true) {... }
 Console.WriteLine("done running your API");
+
+public partial class Program; // In .NET 10 you won't have to do this.
