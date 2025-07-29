@@ -22,4 +22,3 @@ GET {{SoftwareCenter.Api_HostAddress}}/vendors/09dd991a-d360-470a-8d72-a735860ef
 
 ### 
 GET {{SoftwareCenter.Api_HostAddress}}/vendors/
-

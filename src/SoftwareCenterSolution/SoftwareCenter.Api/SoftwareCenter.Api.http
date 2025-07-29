@@ -13,3 +13,6 @@ Content-type: application/json
         "email": "correo@correocaliente.com"
     }
 }
+###
+
+GET {{SoftwareCenter.Api_HostAddress}}/vendors/
