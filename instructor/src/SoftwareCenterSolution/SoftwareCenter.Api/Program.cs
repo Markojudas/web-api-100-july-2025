@@ -6,6 +6,13 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
+builder.Services.AddAuthentication().AddJwtBearer();
+builder.Services.AddAuthorizationBuilder().AddPolicy("CanAddVendor", pol =>
+{
+    pol.RequireRole("Manager");
+    pol.RequireRole("SoftwareCenter");
+});
+
 var connectionString = builder.Configuration.GetConnectionString("db") ?? 
     throw new Exception("Need a connection string");
 
@@ -35,6 +42,7 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers(); // Go find all the controllers and look at the attributes (HttpGet, HttpPost, etc.)
