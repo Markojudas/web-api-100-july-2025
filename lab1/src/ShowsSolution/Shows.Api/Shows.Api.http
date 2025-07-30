@@ -1,6 +1,17 @@
-@Shows.Api_HostAddress = http://localhost:5114
+@Shows.Api_HostAddress = http://localhost:1338
+
+
 
 GET {{Shows.Api_HostAddress}}/weatherforecast/
 Accept: application/json
 
 ###
+
+POST {{Shows.Api_HostAddress}}/api/shows/
+Accept: application/json
+Content-type: application/json
+{
+    "Name": "My Name Is Earl",
+    "Description": "Low-Life turns life around thanks to Carson Daily",
+    "StreamingService": "PlexStation"
+}
