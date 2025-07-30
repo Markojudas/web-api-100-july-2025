@@ -43,7 +43,8 @@ public class Controller(IDocumentSession session) : ControllerBase
             request.Url,
             request.PointOfContact
             );
-        session.Store(response);
+        session.Store(response); // I would to add a vendor
+        //                         // I want to update this other table, maybe 
         await session.SaveChangesAsync();
         return Ok(response); 
     }

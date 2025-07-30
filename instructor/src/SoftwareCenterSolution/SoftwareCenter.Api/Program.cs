@@ -19,6 +19,7 @@ var connectionString = builder.Configuration.GetConnectionString("db") ??
 Console.WriteLine("Using Connection String: " + connectionString);
 builder.Services.AddMarten(config =>
 {
+    // it makes the IDocumentSession available for injecting into your controllers.
     config.Connection(connectionString);
 
 }).UseLightweightSessions();
@@ -33,6 +34,7 @@ builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 
 var app = builder.Build();
+// request _____  response
 // everything after this is configuring "middleware"
 // that is is stuff that will intercept incoming our outgoing HTTP requests
 // and process them in some way.
@@ -42,8 +44,8 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 
-app.UseAuthentication();
-app.UseAuthorization();
+app.UseAuthentication(); // when a request, look at the request to see if it is authenicated.
+app.UseAuthorization(); /// when a request comes in, look to see if it's authorized.
 
 app.MapControllers(); // Go find all the controllers and look at the attributes (HttpGet, HttpPost, etc.)
 // and make yourself a cheat sheet.

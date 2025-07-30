@@ -12,11 +12,7 @@ public  class AddAVendor
     public async Task MustMeetSecurityPolicyToAdd()
     {
         var host = await AlbaHost.For<Program>(
-            config =>
-            {
-
-            }, new AuthenticationStub()
-            );
+            config => {}, new AuthenticationStub());
         // start the API with our Program.cs, and host it in memory
         var vendorToCreate = new CreateVendorRequest
         {
@@ -57,7 +53,6 @@ public  class AddAVendor
             api.Post.Json(vendorToCreate).ToUrl("/vendors");
             api.StatusCodeShouldBe(401);
         });
-
     }
     
     [Fact]
@@ -93,7 +88,6 @@ public  class AddAVendor
 
         Assert.NotNull(postBodyResponse);
 
-
         var getResponse = await host.Scenario(api =>
         {
             api.Get.Url($"/vendors/{postBodyResponse.Id}");
@@ -105,8 +99,6 @@ public  class AddAVendor
         Assert.NotNull(getResponseBody);
 
 
-        Assert.Equal(postBodyResponse, getResponseBody);
-     
-       
+        Assert.Equal(postBodyResponse, getResponseBody);   
     }
 }
