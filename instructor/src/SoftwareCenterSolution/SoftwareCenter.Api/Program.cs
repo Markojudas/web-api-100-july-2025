@@ -1,4 +1,6 @@
+using FluentValidation;
 using Marten;
+using SoftwareCenter.Api.Vendors;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +16,8 @@ builder.Services.AddMarten(config =>
 
 }).UseLightweightSessions();
 
+builder.Services.AddScoped<IValidator<CreateVendorRequest>, CreateVendorRequestValidator>();
+builder.Services.AddScoped<IValidator<CreateVendorPointOfContactRequest>, CreateVendorPointOfContactRequestValidator>();
 // it will give us a scoped service called IDocumentSession
 // if this was Entity framework, it would give us a "DbContext" object we can use.
 

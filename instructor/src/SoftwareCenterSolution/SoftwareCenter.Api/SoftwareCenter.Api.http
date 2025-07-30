@@ -5,7 +5,7 @@ Accept: application/json
 Content-type: application/json
 
 {
-"name": "Docker Inc.",
+
 "url": "https://docker.com",
 "pointOfContact": {
     "name": "Silvio",
@@ -17,7 +17,7 @@ Content-type: application/json
 
 ### 
 
-GET {{SoftwareCenter.Api_HostAddress}}/vendors/09dd991a-d360-470a-8d72-a735860ef343
+GET {{SoftwareCenter.Api_HostAddress}}/vendors/e506c810-taco-salad
 
 
 ### 
