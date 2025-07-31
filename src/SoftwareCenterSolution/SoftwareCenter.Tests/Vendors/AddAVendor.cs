@@ -8,12 +8,13 @@ namespace SoftwareCenter.Tests.Vendors;
 
 public  class AddAVendor
 {
+
     [Fact]
-    public async Task MustMeetSecurityPolicyToAdd()
+    public async Task MustMeetSecurityPolicyToAddAVendor()
     {
         var host = await AlbaHost.For<Program>(
-            config => {}, new AuthenticationStub());
-        // start the API with our Program.cs, and host it in memory
+            cfg => { }, new AuthenticationStub());
+
         var vendorToCreate = new CreateVendorRequest
         {
             Name = "Microsoft",
@@ -30,13 +31,13 @@ public  class AddAVendor
             api.Post.Json(vendorToCreate).ToUrl("/vendors");
             api.StatusCodeShouldBe(403);
         });
-    }
 
+    }
     [Fact]
-    public async Task MustHaveProperAuthToAddVender()
+    public async Task MustHaveProperAuthToAddAVendor()
     {
         var host = await AlbaHost.For<Program>();
-        // start the API with our Program.cs, and host it in memory
+
         var vendorToCreate = new CreateVendorRequest
         {
             Name = "Microsoft",
@@ -49,26 +50,29 @@ public  class AddAVendor
             }
         };
         var postResponse = await host.Scenario(api =>
-        { 
+        {
             api.Post.Json(vendorToCreate).ToUrl("/vendors");
             api.StatusCodeShouldBe(401);
         });
-    }
     
+    }
+
     [Fact]
     public async Task WeGetASuccessStatusCode()
     {
         var host = await AlbaHost.For<Program>(
             config =>
             {
-
-            }, new AuthenticationStub()
+               
+            }, new AuthenticationStub().With("sub", "Jill Smith")
+          
             );
         // start the API with our Program.cs, and host it in memory
         var vendorToCreate = new CreateVendorRequest
         {
             Name = "Microsoft",
             Url = "https://www.microsoft.com",
+
             PointOfContact = new CreateVendorPointOfContactRequest
             {
                 Name = "satya",
@@ -78,15 +82,17 @@ public  class AddAVendor
         };
        var postResponse =  await host.Scenario(api =>
         {
-            api.WithClaim(new Claim(ClaimTypes.Role, "Manager"));
             api.WithClaim(new Claim(ClaimTypes.Role, "SoftwareCenter"));
+            api.WithClaim(new Claim(ClaimTypes.Role, "Manager"));
             api.Post.Json(vendorToCreate).ToUrl("/vendors");
+           
             api.StatusCodeShouldBeOk();
         });
 
         var postBodyResponse = await postResponse.ReadAsJsonAsync<CreateVendorResponse>();
 
         Assert.NotNull(postBodyResponse);
+
 
         var getResponse = await host.Scenario(api =>
         {
@@ -99,6 +105,8 @@ public  class AddAVendor
         Assert.NotNull(getResponseBody);
 
 
-        Assert.Equal(postBodyResponse, getResponseBody);   
+        Assert.Equal(postBodyResponse, getResponseBody);
+     
+       
     }
 }
