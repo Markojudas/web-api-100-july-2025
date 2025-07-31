@@ -39,6 +39,7 @@ public class Controller(IDocumentSession session) : ControllerBase
         // Mapping Code (copy from one object to another)
         var response = new CreateVendorResponse(
             Guid.NewGuid(),
+            User.Identity!.Name!,
             request.Name,
             request.Url,
             request.PointOfContact
@@ -127,5 +128,6 @@ public class CreateVendorPointOfContactRequestValidator :
 
 public record CreateVendorResponse(
     Guid Id,
+    string UserName,
     string Name, string Url, CreateVendorPointOfContactRequest PointOfContact
     );

@@ -1,10 +1,13 @@
 using FluentValidation;
 using Marten;
+using SoftwareCenter.Api.CatalogItems;
 using SoftwareCenter.Api.Vendors;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddCatalogItems();
 
 builder.Services.AddAuthentication().AddJwtBearer();
 builder.Services.AddAuthorizationBuilder().AddPolicy("CanAddVendor", pol =>
@@ -13,7 +16,7 @@ builder.Services.AddAuthorizationBuilder().AddPolicy("CanAddVendor", pol =>
     pol.RequireRole("SoftwareCenter");
 });
 
-var connectionString = builder.Configuration.GetConnectionString("db") ?? 
+var connectionString = builder.Configuration.GetConnectionString("db") ??
     throw new Exception("Need a connection string");
 
 Console.WriteLine("Using Connection String: " + connectionString);
@@ -28,7 +31,7 @@ builder.Services.AddScoped<IValidator<CreateVendorRequest>, CreateVendorRequestV
 builder.Services.AddScoped<IValidator<CreateVendorPointOfContactRequest>, CreateVendorPointOfContactRequestValidator>();
 // it will give us a scoped service called IDocumentSession
 // if this was Entity framework, it would give us a "DbContext" object we can use.
-
+builder.Services.AddScoped<ILookupVendors, VendorLookup>();
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
@@ -51,6 +54,10 @@ app.MapControllers(); // Go find all the controllers and look at the attributes 
 // and make yourself a cheat sheet.
 // if I get a POST /vendors - create a Vendors/Controller instance, and call the AddVendorAsync Method.
 Console.WriteLine("Fixing to run your API");
+
+app.MapCatalogItems();
+
+
 app.Run(); // this is a "blocking method" basically a while(true) {... }
 Console.WriteLine("done running your API");
 

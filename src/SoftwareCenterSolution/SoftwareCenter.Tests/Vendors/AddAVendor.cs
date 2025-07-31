@@ -78,7 +78,7 @@ public  class AddAVendor
                 Name = "satya",
                 Email = "satya@microsoft.com",
                 Phone = "888 555-1212"
-            }
+            },
         };
        var postResponse =  await host.Scenario(api =>
         {

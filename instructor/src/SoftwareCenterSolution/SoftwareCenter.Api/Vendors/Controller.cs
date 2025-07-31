@@ -25,7 +25,7 @@ public class Controller(IDocumentSession session) : ControllerBase
         // }
 
         var validationResults = await validator.ValidateAsync(request);
-        if(!validationResults.IsValid)
+        if (!validationResults.IsValid)
         {
             return BadRequest(validationResults);
         }
@@ -35,10 +35,12 @@ public class Controller(IDocumentSession session) : ControllerBase
         // domain validation - we don't already have a vendor with that same name
         // 
         // we have to "save it" somewhere. 
-       
+
         // Mapping Code (copy from one object to another)
+        
         var response = new CreateVendorResponse(
             Guid.NewGuid(),
+            User.Identity!.Name!,
             request.Name,
             request.Url,
             request.PointOfContact
@@ -46,7 +48,7 @@ public class Controller(IDocumentSession session) : ControllerBase
         session.Store(response); // I would to add a vendor
         //                         // I want to update this other table, maybe 
         await session.SaveChangesAsync();
-        return Ok(response); 
+        return Ok(response);
     }
 
 
@@ -92,7 +94,7 @@ public class Controller(IDocumentSession session) : ControllerBase
 
 public record CreateVendorRequest
 {
-   
+
     public string Name { get; init; } = string.Empty;
     public string Url { get; init; } = string.Empty;
     public CreateVendorPointOfContactRequest PointOfContact { get; init; } = new();
@@ -121,11 +123,12 @@ public class CreateVendorPointOfContactRequestValidator :
     public CreateVendorPointOfContactRequestValidator()
     {
         RuleFor(p => p.Name).NotEmpty();
- 
+
     }
 }
 
 public record CreateVendorResponse(
     Guid Id,
+    string AddedBy,
     string Name, string Url, CreateVendorPointOfContactRequest PointOfContact
     );

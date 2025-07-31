@@ -1,11 +1,12 @@
 @SoftwareCenter.Api_HostAddress = http://localhost:1337
 
 POST {{SoftwareCenter.Api_HostAddress}}/vendors
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6InN1ZUBhb2wuY29tIiwic3ViIjoic3VlQGFvbC5jb20iLCJqdGkiOiI4ODI1ZDU5MCIsInJvbGUiOlsiU29mdHdhcmVDZW50ZXIiLCJNYW5hZ2VyIl0sImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6MTMzNyIsIm5iZiI6MTc1Mzk3MzU1NSwiZXhwIjoxNzYxOTIyMzU1LCJpYXQiOjE3NTM5NzM1NTUsImlzcyI6ImRvdG5ldC11c2VyLWp3dHMifQ.ADnsGhBbgtO-WAnJzzjLwv0gPw-nPd25wPosleyCSsA
 Accept: application/json
 Content-type: application/json
 
 {
-
+"name": "Docker",
 "url": "https://docker.com",
 "pointOfContact": {
     "name": "Silvio",
@@ -22,3 +23,21 @@ GET {{SoftwareCenter.Api_HostAddress}}/vendors/e506c810-taco-salad
 
 ### 
 GET {{SoftwareCenter.Api_HostAddress}}/vendors/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImJvYkBhb2wuY29tIiwic3ViIjoiYm9iQGFvbC5jb20iLCJqdGkiOiIxNmQyNWE2YiIsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6MTMzNyIsIm5iZiI6MTc1Mzk3MzMyNiwiZXhwIjoxNzYxOTIyMTI2LCJpYXQiOjE3NTM5NzMzMjgsImlzcyI6ImRvdG5ldC11c2VyLWp3dHMifQ.zpEo-_nQeS_1ePR3n53BlHJ6QEZ8zlc6ed7CNOjcONw
+
+
+###
+
+GET {{SoftwareCenter.Api_HostAddress}}/info
+
+
+###
+
+POST {{SoftwareCenter.Api_HostAddress}}/vendors/c53f4f43-71cd-45bb-9333-2c7cf9afbfaf/items 
+Content-Type: application/json
+
+{
+    "name": "Word",
+    "description": "Do words and stuff",
+    "version": "2025"
+}

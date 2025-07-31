@@ -1,46 +1,37 @@
 ﻿
-Console.WriteLine("Hello, World!");
 
+Console.Write("Enter a number: ");
+var enteredNumber = Console.ReadLine();
 
-var carl = new Employee();
+var tom = DateTimeOffset.UtcNow.Tomorrow();
 
-carl.Name = "Carl Smith";
-carl.Salary = 100_000M;
-
-Console.WriteLine($"Salary is {carl.Salary}");
-Console.WriteLine(carl.Name.ToUpper());
-
-
-var carl2 = new Employee();
-
-carl2.Name = "Carl Smith";
-carl2.Salary = 100_000;
-
-if(carl == carl2)
+if(int.TryParse(enteredNumber, out int x))
 {
-    Console.WriteLine("The carls are the same");
-
+   
+    if (x.IsEven())
+    {
+        Console.Write("That is an even number!");
+    }
+    else
+    {
+        Console.WriteLine("That is an odd number");
+    }
 }
 else
 {
-    Console.WriteLine("The carls are different");
-
+    Console.WriteLine("I Said a NUMBER, Moron.");
 }
-Console.WriteLine(carl);
-Console.WriteLine(carl2);
 
 
-var bob = EmployeeRepository.GetById(13);
+public static class Extensions
+{
+    public static bool IsEven(this int x)
+    {
+        return x % 2 == 0;
+    }
 
-Console.WriteLine(bob.Name);
-
-//bob.Salary = bob.Salary * 2;
-
-Console.WriteLine(bob.Salary);
-
-
-var bobUpdated = bob with { Salary = 8000 };
-
-Console.WriteLine("After the Update");
-Console.WriteLine(bob);
-Console.WriteLine(bobUpdated);
+    public static DateTimeOffset Tomorrow(this DateTimeOffset x)
+    {
+        return x.AddDays(1);
+    }
+}
